@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enlarge Image</title>
+  <style>
+    /* Style for enlarged image */
+    .enlarged {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .enlarged img {
+      max-width: 80%;
+      max-height: 80%;
+    }
+  </style>
+</head>
+<body>
+  <div class="enlarged" id="enlarged-container">
+    <img src="" alt="Enlarged Image" id="enlarged-image">
+  </div>
+
+  <script>
+    // JavaScript for image enlargement and reduction
+    const enlargedContainer = document.getElementById('enlarged-container');
+    const enlargedImage = document.getElementById('enlarged-image');
+
+    // Function to enlarge the clicked image
+    function enlargeImage(src) {
+      enlargedImage.src = src;
+      enlargedContainer.style.display = 'flex';
+    }
+
+    // Function to reduce the enlarged image
+    function reduceImage() {
+      enlargedContainer.style.display = 'none';
+    }
+
+    // Add event listeners to all images
+    const images = document.querySelectorAll('img');
+    images.forEach((img) => {
+      img.addEventListener('click', () => {
+        enlargeImage(img.src);
+      });
+    });
+
+    // Click outside of the enlarged image to reduce it
+    enlargedContainer.addEventListener('click', (e) => {
+      if (e.target === enlargedContainer) {
+        reduceImage();
+      }
+    });
+  </script>
+</body>
+</html>
